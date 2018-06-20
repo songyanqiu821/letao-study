@@ -10,6 +10,7 @@ $(function(){
 
 });
 
+// 获取表单数据方法
 $.fn.serializeToJson = function () {
 
 	var formAry = this.serializeArray();
@@ -24,8 +25,12 @@ $.fn.serializeToJson = function () {
 	return result;
 
 }
+// 允许cookie
+
+$.ajaxSetup({crossDomain: true, xhrFields: {withCredentials: true}});
 
 
-var  APP = {
+// 基础路径 【此处是定义了个对象】
+var  APP = {//http://fullstack.net.cn:3000
 	baseURL :'http://fullstack.net.cn:3000'
 }

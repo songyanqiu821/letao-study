@@ -8,7 +8,9 @@
 	<link rel="stylesheet" href="css/system.css">
 	<script src="assets/jquery/jquery.min.js"></script>
 	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+	<script src="assets/artTemplate/template-native.js"></script>
 	<script src="js/common.js"></script>
+	<script src="js/user.js"></script>
 </head>
 <body>
 	<div class="system">
@@ -76,17 +78,32 @@
 	        			<th>状态</th>
 	        			<th>操作</th>
 	        		</tr>
-	        		<tr>
-	        			<td>18500000000</td>
-	        			<td>18500000000</td>
-	        			<td>已启用</td>
-	        			<td>
-	        				<button type="button" class="btn btn-danger">禁用</button>
-	        			</td>
-	        		</tr>
+	        		<tbody id="userBox"></tbody>
+	        		
 	        	</table>
 	        </div>
 		</div>
 	</div>
+	<!-- 模板中需要注意的是 用户的状态：
+	用户状态是启用的时候 类名【样式】是btn-success 禁用的时候是btn-danger 
+	用户状态的值是1的时候表明是启用 0 是禁用
+	-->
+	<script type="text/html" id="userTPL">
+	<%for (var  i = 0 ; i < rows.length; i++ ) { %>
+		<tr>
+			<td><%=rows[i].username%></td>
+			<td><%=rows[i].mobile%></td>
+			<td><%=rows[i].isDelete == 1 ? '已启用' : '禁用' %></td>
+			<td>
+				<button 
+				type="button" 
+				class=" userStatus  btn 
+				<%=rows[i].isDelete==1 ? 'btn-danger' : 'btn-success' %>"  
+				data-user-id = "<%=rows[i].id%>"
+				data-isdelete ="<%=rows[i].isDelete%>" ><%=rows[i].isDelete == 1 ? '禁用' : '启用' %></button>
+			</td>
+		</tr>
+	<% } %>
+	</script>
 </body>
 </html>
