@@ -2,10 +2,11 @@ $(function (){
 	// alert(1)
 	// 当前页
 	var page = 1;
-	// 当前也显示的条数
+	// 当前页显示的条数
 	var pageSize = 10;
 	// 总页数
 	var totalPage = 0;
+
 	getData ();
 
 	$('#prev').on('click',function (){
@@ -60,6 +61,39 @@ $(function (){
 			}
 		})
 	}
+
+	// 当添加分类的保存按钮被点击的时候
+		$('#addCategoryFirst').on('click', function () {
+			// 获取用户输入的分类名称
+			var categoryName = $.trim($('#categoryName').val());
+
+			// 如果用户没有输入分类名称
+			if (!categoryName) {
+				alert('请输入分类名称');
+				return;
+			}
+
+			$.ajax({
+				url: `${APP.baseUrl}/category/addTopCategory`,
+				type: 'post',
+				data: {
+					categoryName
+				},
+				success: function (response) {
+					if (response.success) {
+						location.reload();
+					}else {
+						alert(response.message);
+					}
+				}
+			})
+
+		});
+
+
+
+
 })
+
 
 
